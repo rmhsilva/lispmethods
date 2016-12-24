@@ -1,14 +1,14 @@
 # A Common Lisp Development Environment
 
-Installing Common Lisp is tricky, and probably one of the reasons people are
-turned off by the language in general. Which is a shame really. It's like being
-put off desert because there are too many choices on the menu (the correct
-choice is always tiramisou).
+Getting started developing with Common Lisp is tricky, and probably one of the
+reasons people are turned off by the language in general. Which is a shame
+really. It's like being put off desert because there are too many choices on the
+menu (the correct choice is always tiramisou).
 
 Read on to find out how to:
 - Install a Common Lisp implementation
 - Add some useful libraries
-- Install a modern lisp development environment
+- Install a development environment
 
 The entire process should take less than 5 minutes (I'm ignoring download time -
 convenient right?).
@@ -45,9 +45,6 @@ You're now sitting in a Read-Eval-Print-Loop (REPL), a fully functional CL
 environment, **congratulations**. You can do everything you'd expect, and a lot
 more you wouldn't, like intalling libraries (see below).
 
-Note: the default SBCL prompt is not too useful (it's the single "*"
-you see above). We'll make it better later on.
-
 Next up - getting libraries.
 
 
@@ -70,6 +67,8 @@ Quicklisp has been installed, lets just install a few useful ones now.
 
 ## IDE
 
+*Opinionated stuff here...*
+
 Download and install the following:
 - Emacs (version >25)
 - Spacemacs
@@ -83,6 +82,8 @@ away and read:
 - XXX
 - XXX
 
+Alternatively, you could use Vim + Slimv. I've never done so, and can't comment.
+
 
 ## Done!
 
@@ -92,14 +93,9 @@ an IDE to develop in. YAY.
 ---
 
 
-## Extra Stuff
+## Notes on CL Implementations
 
-### SBCL customisation
-
-- rlwrap
-- quicklisp
-
-### Notes on CL Implementations
+I told you to install SBCL. This was not the only option.
 
 "Lisp" is a large set of languages, that, as far as I can tell, includes
 anything that is written using s-expressions. Opinions vary. Anyway, the
@@ -112,19 +108,16 @@ There are open source (e.g., SBCL, Clasp) and closed source implementations
 ANSI, so you are guaranteed some level of portability between implementations.
 However, all the extra stuff bundled with implementations varies, and so you
 cannot expect any non-standard features to be portable. Notably:
-- Threading??
-- XXX
+- Threading
+- Unicode
+- Executable format
 
-SBCL is an open source, popular implementation with a focus on speed. It
-integrates well with Emacs via SLIME, which is the main reason for preferring
-it, frankly.
+SBCL is an open source, popular implementation with lots of features that make
+it great. It has been under development for a long time, and hence is very
+stable, it has fantastic editor integration (e.g. via SLIME in Emacs), and
+compiles to well optimised native code. It also runs on lots of platforms.
 
 Other interesting implementations:
-- ECL, as it compiles down to C
+- ECL, which compiles down to C
 - Clasp, for its C/C++ interop
-
-Other popular lisps:
-- Clojure (and Clojurescript)
-- Scheme
-- Guile
 
