@@ -4,12 +4,37 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+This is a growing collection of articles about (ANSI) Common Lisp, and how to do
+useful things with it. I do not intend to convince you that Lisp is a
+fundamentally better programming language, or other opinionated nonsense. There
+is enough of that spread across the internet already.
 
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jekyll" %} /
-[minima](https://github.com/jekyll/minima)
+However I will not attempt to disguise the fact that **I really enjoy using
+Lisp**. In case writing about it didn't make that clear enough.
 
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+Any references I make to "Lisp" probably refer to Common Lisp, unless I
+explicitly state otherwise. I'm just lazy like that. Also, I usually assume you
+are running [SBCL][sbcl].
+
+[sbcl]: http://www.sbcl.org/
+
+Recommended reading for anyone new to Common Lisp:
+
+- [Practical Common Lisp (Peter Seibel)](http://www.gigamonkeys.com/book/)
+- [On Lisp (Paul Graham)](http://www.paulgraham.com/onlisp.html)
+- [Common Lisp Recipes (Edmund Weitz)](http://weitz.de/cl-recipes/)
+- and for the really keen, [Let Over Lambda (Doug Hoyte)](http://letoverlambda.com/)
+
+Enjoy!
+
+[*Ricardo da Silva*](http://rmhsilva.com)
+
+---
+
+#### PS:
+
+I assume at least an intermediate level of programming experience (any language
+will do) - if you don't know how to open a command prompt, this probably isn't
+for you.
+
+Many things I write will probably be wrong. Please educate me.

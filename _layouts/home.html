@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+    {% include head.html %}
+
+    <!-- TODO: full post text instead of excerpts, featured posts -->
+
+    <body>
+
+        <header class="home-header" role="banner">
+
+            <a class="home-logo" href="{{ "/" | relative_url}}">
+                <img src="/assets/logo.png" alt="lispmethods.com">
+            </a>
+
+            <nav class="home-nav">
+                {% for my_page in site.pages %}
+                {% if my_page.title %}
+                <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+                {% endif %}
+                {% endfor %}
+            </nav>
+
+        </header>
+
+        <main class="content-home" aria-label="Content">
+
+            {{ content }}
+
+            <ul class="post-list">
+                {% for post in site.posts %}
+                <li>
+                    <a class="post-link" href="{{ post.url | relative_url }}">
+                        <h2>{{ post.title | escape }}</h2>
+                    </a>
+                    <p class="post-excerpt">
+                        {{ post.excerpt | remove: '<p>' | remove: '</p>' }}
+                    </p>
+                    <a href="{{ post.url | relative_url }}">
+                        <p class="post-readmore">Read More...</p>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+
+            {% comment %}
+            {% for post in site.posts %}
+                <div class="post-content">
+                    <h1>{{ post.title | escape }}</h1>
+
+                    {{ post.content }}
+                </div>
+            {% endfor %}
+            {% endcomment %}
+        </main>
+
+    </body>
+
+</html>

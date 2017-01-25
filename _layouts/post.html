@@ -1,0 +1,23 @@
+---
+layout: default
+---
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-main">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">{{ page.title | escape }}</h1>
+        </header>
+
+        <div class="post-content" itemprop="articleBody">
+            {{ content }}
+        </div>
+
+        <p class="post-meta">
+            <span>Updated:</span> <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>
+        </p>
+    </div>
+
+    {% if site.disqus.shortname %}
+    {% include disqus_comments.html %}
+    {% endif %}
+</article>

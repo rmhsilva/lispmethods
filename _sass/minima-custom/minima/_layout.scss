@@ -1,0 +1,398 @@
+/**
+ * Wrapper
+ */
+.wrapper {
+    max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit}));
+    max-width:         calc(#{$content-width} - (#{$spacing-unit}));
+    padding-right: 2*$spacing-unit;
+    padding-left: 3*$spacing-unit;
+    @extend %clearfix;
+
+    @include break($normal) {
+        max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
+        max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
+        padding-left: 4*$spacing-unit;
+    }
+}
+
+
+/**
+ * Site header
+ */
+.site-header {
+    padding: ( $spacing-unit * 2 ) $spacing-unit;
+
+    // Positioning context for the mobile navigation icon
+    position: relative;
+
+    a.site-title {
+        display: inline-block;
+        margin-left: $spacing-unit*2;
+
+        @include break($normal) {
+            margin-left: $spacing-unit*3;
+        }
+    }
+}
+
+
+/**
+ * Navigation
+ */
+.site-nav {
+    max-width: $content-width;
+    position: relative;
+
+    // Move the menu down
+    @include break($medium) {
+        top: 1.2*$base-line-height;
+    }
+
+    // Position the menu
+    .trigger {
+        float: right;
+        text-align: right;
+        max-width: 5em;
+        margin-right: 2 * $spacing-unit;
+
+        @include break($medium) {
+            max-width: none;
+            margin-right: 4 * $spacing-unit;
+        }
+    }
+}
+
+.page-link {
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: darken($highlight-color, 20%);
+    line-height: $base-line-height;
+    display: inline-block;
+    padding-left: 20px;
+
+    @include break($normal) {
+        padding-left: 0;
+
+        // Gaps between nav items, but not on the last one
+        &:not(:last-child) {
+            margin-right: 20px;
+        }
+    }
+}
+
+
+/**
+ * Site footer
+ */
+.site-footer {
+    border-top: 1px solid $grey-color-light;
+    padding: 2*$spacing-unit 0;
+}
+
+.footer-heading {
+    font-size: 18px;
+    margin-bottom: $spacing-unit / 2;
+}
+
+.contact-list,
+.social-media-list {
+    list-style: none;
+    margin-left: 0;
+}
+
+.footer-col-wrapper {
+    font-size: 15px;
+    color: $grey-color;
+    margin-left: -$spacing-unit / 2;
+    @extend %clearfix;
+}
+
+.footer-col {
+    width: -webkit-calc(100% - (#{$spacing-unit} / 2));
+    width:         calc(100% - (#{$spacing-unit} / 2));
+}
+
+.footer-col-1,
+.footer-col-2 {
+    width: -webkit-calc(50% - (#{$spacing-unit} / 2));
+    width:         calc(50% - (#{$spacing-unit} / 2));
+}
+
+.footer-col-3 {
+    width: -webkit-calc(100% - (#{$spacing-unit} / 2));
+    width:         calc(100% - (#{$spacing-unit} / 2));
+}
+
+// Transition to columns when big enough
+@include break($normal) {
+    .footer-col {
+        float: left;
+        margin-bottom: $spacing-unit / 2;
+        padding-left: $spacing-unit / 2;
+    }
+
+    .footer-col-1 {
+        width: -webkit-calc(27% - (#{$spacing-unit} / 2));
+        width:         calc(27% - (#{$spacing-unit} / 2));
+    }
+
+    .footer-col-2 {
+        width: -webkit-calc(73% - (#{$spacing-unit} / 2));
+        width:         calc(73% - (#{$spacing-unit} / 2));
+    }
+}
+
+/**
+ * Page content
+ */
+.page-content {
+    padding: $spacing-unit 0;
+    padding-bottom: 2em;
+    border-top: 1px solid #E0E0E0;
+    background-color: $page-background-color;
+}
+
+.page-heading {
+    font-size: 20px;
+}
+
+.post-meta {
+    font-size: $small-font-size;
+    margin-top: 1.5*$base-line-height;
+    font-style: italic;
+
+    // &::before {
+    //     content: "  ";
+    //     position: absolute;
+    //     width: 10em;
+    //     border-top: 1px solid gray;
+    // }
+}
+
+
+/**
+ * Home Page
+ */
+$home-break: 500px;
+
+.home-header {
+    margin: (4*$spacing-unit) auto;
+
+    @include break($home-break) {
+        position: fixed;
+        top: 2*$spacing-unit;
+        left: 4*$spacing-unit;
+        margin: 0;
+    }
+
+    & > a,nav {
+        text-align: center;
+        display: block;
+        padding-bottom: 2*$spacing-unit;
+    }
+
+}
+
+/**
+ * Home content: responsive sizing
+ */
+.content-home {
+    width: 100%;
+    padding: 0 2*$spacing-unit;
+
+    @include break($home-break) {
+        margin-top: 2*$spacing-unit;
+        margin-left: 40%;
+        width: 60%;
+    }
+
+    @include break($home-break + 140) {
+        margin-left: 0.4*($home-break + 140);
+        width: auto;
+        max-width: $reading-width;
+    }
+}
+
+ul.post-list {
+    margin-top: 2em;
+    list-style: none;
+
+    > li {
+        margin-bottom: 4*$spacing-unit;
+    }
+
+    h2 {
+        font-size: 24px;
+        line-height: 24px;
+        margin-top: 0;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+    }
+
+    a:hover, a:active {
+        text-decoration: none;
+    }
+
+    a:visited h2 {
+        color: lighten($text-color, 10%);
+    }
+
+    .post-excerpt  {
+        color: $text-color;
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 0.5em;
+        // To compensate for smaller font size:
+        max-width: 0.8*$reading-width;
+    }
+
+    .post-readmore {
+        margin-top: 0;
+        font-size: 16px;
+        letter-spacing: 0.5px;
+    }
+}
+
+
+/**
+ * Posts with their 'interesting' left margins
+ */
+// Most post elements
+.post-main > header,
+.post-content > h1,
+.post-content > h2,
+.post-content > h3,
+.post-content > h4,
+.post-content > p,
+.post-content > ul,
+.post-content > hr,
+.post-meta {
+    padding-right: 2*$spacing-unit;
+    // margin-left: 3*$spacing-unit;
+    max-width: $reading-width;
+
+    // Add sidebar when big enough (27% margin)
+    @include break($normal) {
+        margin-left: 0.27*$normal;
+    }
+}
+
+.post-main {
+    // Blockquotes with hanging bar things
+    blockquote {
+        padding-right: 2*$spacing-unit;
+        margin-left: -16px;
+        max-width: $reading-width;
+
+        p {
+            margin-left: 0;
+        }
+
+        @include break($normal) {
+            margin-left: 0.27*$normal - 16px;
+        }
+    }
+
+    // Code blocks at the top level
+    .post-content > div.highlighter-rouge,
+    .post-content > .highlight {
+        margin-left: -1*$spacing-unit;
+        max-width: 40em;
+
+        // Code blocks extend left a bit more
+        @include break($normal) {
+            margin-left: 0.23*$normal;
+        }
+    }
+}
+
+.post-header {
+    margin-bottom: $spacing-unit;
+}
+
+.post-title {
+    font-size: 0.9*2.441rem;
+    letter-spacing: -1px;
+    line-height: 1;
+    font-weight: lighter;
+    margin-top: 1.5em;
+
+    @include break($normal) {
+        font-size: 2.441rem;
+    }
+}
+
+// http://www.modularscale.com/?1&rem&1.25
+.post-content {
+    word-break: break-word;
+    position: relative;         // For the TOC
+
+    h2, h3, h4 {
+        position: relative;
+    }
+
+    h2 {
+        font-size: 0.9*1.953rem;
+
+        @include break($normal) {
+            font-size: 1.953rem;
+        }
+    }
+
+    h3 {
+        font-size: 0.9*1.563rem;
+
+        @include break($normal) {
+            font-size: 1.563rem;
+        }
+    }
+
+    h4 {
+        font-size: 0.9*1.25rem;
+
+        @include break($normal) {
+            font-size: 1.25rem;
+        }
+    }
+}
+
+/* TOCs. TODO: get a better method */
+ul#markdown-toc {
+    display: none;
+
+    @include break($normal) {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        max-width: 0.20*$normal;
+        border-right: 1px solid #eaeaea;
+        padding-right: 1em;         // Gap for text->border
+        // padding-left: 4*$spacing-unit;
+        margin-left: 0;
+        margin-top: 0;
+
+        &::before {
+            content: "CONTENTS";
+            color: $grey-color-dark;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        ul {
+            padding-left: 1em;
+        }
+
+        li {
+            list-style: none;
+            margin-bottom: 7px;
+            line-height: 21px;
+        }
+
+        a, a:visited {
+            color: darken($highlight-color, 20%);
+            font-size: 16px;
+        }
+    }
+}
