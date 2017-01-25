@@ -52,11 +52,11 @@
     .trigger {
         float: right;
         text-align: right;
-        max-width: 5em;
+        // max-width: 5em;
         margin-right: 2 * $spacing-unit;
 
         @include break($medium) {
-            max-width: none;
+            // max-width: none;
             margin-right: 4 * $spacing-unit;
         }
     }
@@ -68,11 +68,12 @@
     letter-spacing: 1px;
     color: darken($highlight-color, 20%);
     line-height: $base-line-height;
-    display: inline-block;
+    display: block;
     padding-left: 20px;
 
     @include break($normal) {
         padding-left: 0;
+        display: inline-block;
 
         // Gaps between nav items, but not on the last one
         &:not(:last-child) {
@@ -113,13 +114,9 @@
     width:         calc(100% - (#{$spacing-unit} / 2));
 }
 
+.footer-col,
 .footer-col-1,
 .footer-col-2 {
-    width: -webkit-calc(50% - (#{$spacing-unit} / 2));
-    width:         calc(50% - (#{$spacing-unit} / 2));
-}
-
-.footer-col-3 {
     width: -webkit-calc(100% - (#{$spacing-unit} / 2));
     width:         calc(100% - (#{$spacing-unit} / 2));
 }
