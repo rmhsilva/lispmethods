@@ -231,8 +231,11 @@ ul.post-list {
     }
 
     a:hover, a:active {
-        color: $text-color;
         text-decoration: none;
+    }
+
+    a h2 {
+        color: $text-color;
     }
 
     a:visited h2 {
