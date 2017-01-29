@@ -24,6 +24,7 @@ url: "http://lispmethods.com" # the base hostname & protocol for your site, e.g.
 # github_username: rmhsilva
 
 # Build settings
+permalink: :title.html
 markdown: kramdown
 theme: minima
 gems:

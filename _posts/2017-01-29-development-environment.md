@@ -3,6 +3,9 @@ layout: post
 title: Getting Started With Common Lisp
 ---
 
+An overview of how to quickly set up a development environment and get started
+with Common Lisp.
+
 Getting started developing with Common Lisp is tricky, and probably one of the
 reasons people are turned off by the language in general. Which is a shame
 really. It's like being put off desert because there are too many choices on the
@@ -19,8 +22,11 @@ Read on to find out how to:
 The entire process should take less than 5 minutes (I'm ignoring download time
 -- convenient right?).
 
+
+{:comment}
 TODO: give the brief overview of the essential parts. Then talk about the
 details, using Roswell, etc. Make it something that will have lasting value.
+{:endcomment}
 
 
 ## Installing Lisp
@@ -34,7 +40,8 @@ And in most cases, the answer is this:
 > Google "Steel Bank Common Lisp", and install it. Now.
 
 Or just click [this link](http://www.sbcl.org/platform-table.html) to go
-straight to the download page.
+straight to the download page. Or use your favourite package manager, which will
+probably have an `sbcl` package available.
 
 There you go, you've installed Common Lisp (the SBCL implementation, to be
 precise - [there are others](#notes-on-implementations)). Fire it up in a
@@ -75,10 +82,10 @@ Currently the best way to explore and experiment with Common Lisp libraries is
 
 Download Quicklisp and follow the install instructions [here][ql-inst]. Make sure you
 do the bit that adds Quicklisp to SBCL's startup script (`ql:add-to-init-file`)
-as this makes development wayy easier...
+as this makes development way easier...
 
 For more details about how libraries work, see [Libraries]({% post_url
-2016-12-24-libraries %}). Assuming we're in SBCL and Quicklisp has been
+2017-01-29-libraries %}). Assuming we're in SBCL and Quicklisp has been
 installed, lets just install a few useful ones now:
 - Loads of utilities ([alexandria](#)) `(ql:quickload :alexandria)`
 - Regular expressions ([cl-ppcre](#)) `(ql:quickload :cl-ppcre)`
@@ -91,9 +98,16 @@ here when they're ready!
 [ql-inst]: https://www.quicklisp.org/beta/#installation
 [ql-main]: https://www.quicklisp.org/beta/
 
+
 ## IDE
 
-*Opinionated stuff here...*
+Now that "Common Lisp" is installed, you'll want something to develop with. If
+this was a C# tutorial, this is where you'd be told to install Microsoft Visual
+C#, or maybe Mono. Really all you need is a programming editor, but what you
+actually *want* is a tool that integrates tightly with Common Lisp, greatly
+enhancing the development experience.
+
+*Opinionated stuff here, feel free to ignore it if that bothers you*
 
 Download and install the following:
 - Emacs (version >25)
@@ -103,10 +117,16 @@ And then enable the 'common-lisp' layer in Spacemacs.
 
 _That is all_.
 
-The most productive IDE I know about for writing Lisp is Emacs. Nothing else
-I've used comes close. Got something better? Let me know! There are loads of
-other articles around describing how to setup Emacs for Lisp development, so go
-and read:
+(If you have now idea what Spacemacs is, "enabling a layer" probably means
+nothing to you, in which case you should have a look at the Spacemacs
+[documentation][spacemacs-doc], it's really good.)
+
+[spacemacs-doc]: http://spacemacs.org/doc/QUICK_START
+
+The most productive IDE I know of for developing with Lisp is Emacs. Nothing
+else I've used comes close. For any launage in fact. Got something better? Let
+me know! There are loads of other articles around describing how to setup Emacs
+for Lisp development, so go and read:
 - <http://nullprogram.com/blog/2010/01/15/>
 - <http://emacsrocks.com/>
 - <https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/common-lisp>
@@ -124,7 +144,27 @@ probably want this option.
 You now have a Common Lisp implementation installed, a few useful libraries, and
 an IDE to develop in. YAY.
 
+Was that less than 5 minutes?
+
 ---
+
+## Recap
+
+Great, so now you're totally set up for developing Common Lisp. Lets recap what
+you actually have installed:
+
+* SBCL, a popular Common Lisp "implementation"
+* Quicklisp, a library manager
+* Spacemacs, a modern Emacs configuration
+
+SBCL is the thing that "runs" CL code. It contains, among other things, an
+interpreter, a compiler, and a REPL interface. But SBCL is more than that --
+the [docs][sbcl-docs] are pretty good. Quicklisp lets you easily install
+libraries. Spacemacs provides a Common Lisp development environment,
+including [SLIME][slime], with enhanced SBCL support.
+
+[sbcl-docs]: http://www.sbcl.org/manual/index.html
+[slime]: https://common-lisp.net/project/slime/
 
 
 ## Notes on Implementations
@@ -156,6 +196,14 @@ compiles to well optimised native code. It also runs on lots of platforms.
 Other interesting Common Lisps:
 - [ECL](https://common-lisp.net/project/ecl/), which compiles down to C
 - [Clasp](https://github.com/drmeister/clasp), for its C/C++ inter-operability
+
+
+### Roswell
+
+[Roswell](https://github.com/roswell/roswell) is an actively developed "Lisp
+implementation installer/manager, launcher, and much more", which is becoming
+more popular for full stack Common Lisp development. Among other things, it lets
+you install multiple Lisp implementations on one machine.
 
 
 [cl-ansi]: https://standards.incits.org/apps/group_public/project/details.php?project_id=1012

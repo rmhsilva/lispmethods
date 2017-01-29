@@ -3,8 +3,8 @@ layout: post
 title: Libraries
 ---
 
-Here be answers to the inevitable questions asked, by people new to Common Lisp,
-about how to find, use and create 'libraries'.
+Answers to the inevitable questions asked, by people new to Common Lisp, about
+how to find, use and create libraries.
 
 * toc
 {:toc}
@@ -24,6 +24,10 @@ See http://tychoish.com/post/using-asdf-install-with-sbcl/ as well.
 
 {:/comment}
 
+"Libraries" are a tricky concept in Common Lisp, probably the language has been
+around for ages and the preferred way of doing things has evolved. This article
+aims to give you some insight into how things are done these days, and hopefully
+clear up some confusion.
 
 Read on for the info, or go straight to the [examples](#examples).
 
@@ -34,23 +38,25 @@ For the purposes of this article, a **library** is a collection of code for
 doing something specific, designed to be used as part of a larger library or
 application.
 
-Common Lisp:
-- **Packages** are containers for Common Lisp symbols, and are defined by the
-  standard. Similar to C++ namespaces. Key point - one does not 'install' a
+Common Lisp has some further definitions:
+- **Packages** are defined by the Common Lisp standard as containers for
+  symbols, similar to C++ namespaces. Key point: one does not 'install' a
   package; that'd be silly, it's just a group of names. Instead, the code that
-  defines the package is loaded, and then the symbols in the package can be
-  accessed.
+  defines the package is loaded[^1], and then the symbols in the
+  package can be accessed.
 - **Systems** are *not* defined in the CL standard, but essentially they are
   groups of code (usually including one or more package definitions), and any
-  information required to build and run the code (dependencies, etc). They
-  typically also include 'extra' information about the code (author, license,
-  system name, etc), 
+  information required to build and run the code (dependencies, unit tests,
+  etc). They typically also include 'extra' information about the code (author,
+  license, system name, etc), but are basically a way to structure a project.
 
-Need more? Go and read <http://weitz.de/packages.html>, a fantastic and detailed
+Want more? Go and read <http://weitz.de/packages.html>, a fantastic and detailed
 description of how all this stuff works. Also useful is
 the [PCL chapter on packages][pcl-packages].
 
 [pcl-packages]: http://gigamonkeys.com/book/programming-in-the-large-packages-and-symbols.html
+
+[^1]: For example, by evaluating the code in a REPL, or with a call to `load`
 
 
 ## Tools
@@ -68,10 +74,10 @@ You'll definitely come across these at some point.
 
 
 
-## Quicklisp
+### Quicklisp
 
-> Experimenting with and using open-source libraries is so easy in <insert
-> favourite language here>. I want that in Common Lisp!
+> Experimenting with and using open-source libraries is so easy in
+> favourite-language-here. I want that in Common Lisp!
 
 Most languages deal with this stuff quite differently. Python has pip, which is
 fairly well established as the Python package manager. If you want to share some
@@ -87,12 +93,7 @@ implementation could find it.
 These days we have [Quicklisp](http://quicklisp.org)
 
 
-## Essential reading
-
-- Practical Common Lisp's chapter on packages:
-
-
-## ASDF
+### ASDF
 
 ASDF (Another System Definition Facility) is included in most popular CL
 implementations, including SBCL.
@@ -123,4 +124,10 @@ Creating, specifying dependencies, importing names
 
 ### Quicklisp
 
+Install and search for packages
+
+#### blach
+
 ### System definitions
+
+Create an ASDF file!

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="177px" height="112px" viewBox="0 0 177 112" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>8.2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="8.2">
+            <g id="Group">
+                <rect id="BG" fill="#2B2B2B" x="5" y="5" width="172" height="107"></rect>
+                <rect id="FG" fill="#62C2E3" x="0" y="7.10542736e-15" width="172" height="107"></rect>
+            </g>
+            <path d="M75,76.8 L49.7541649,76.8 C44.0577967,76.8 40.6,73.2277274 40.6,67.1406791 L40.6,18 L21,18 L21,93.4 L78.9705035,93.4 L94.5,93.4 L94.5,57.7909556 L108.437879,93.4 L116.237879,93.4 L130.792503,57.7909556 L130.792503,93.4 L150.292503,93.4 L150.292503,52.5041998 L150.292503,18 L130.892503,18 L112.646252,57.7909556 L94.5,18 L75,18 L75,76.8 Z" id="LM" fill="#2B2B2B"></path>
+        </g>
+    </g>
+</svg>

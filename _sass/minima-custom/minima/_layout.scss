@@ -19,8 +19,10 @@
 /**
  * Site header
  */
+$header-height: 100px;
 .site-header {
     padding: ( $spacing-unit * 2 ) $spacing-unit;
+    height: $header-height;
 
     // Positioning context for the mobile navigation icon
     position: relative;
@@ -33,6 +35,10 @@
             margin-left: $spacing-unit*3;
         }
     }
+
+    .logo {
+        height: $header-height - ($spacing-unit * 4)
+    }
 }
 
 
@@ -41,7 +47,6 @@
  */
 .site-nav {
     max-width: $content-width;
-    position: relative;
 
     // Move the menu down
     @include break($medium) {
@@ -50,14 +55,22 @@
 
     // Position the menu
     .trigger {
-        float: right;
+        position: absolute;
+        right: 0;
+        top: $base-line-height;
         text-align: right;
+        // float: right;
         // max-width: 5em;
         margin-right: 2 * $spacing-unit;
 
         @include break($medium) {
             // max-width: none;
             margin-right: 4 * $spacing-unit;
+        }
+
+        // Move down when switch to inline again
+        @include break($normal) {
+            top: 2*$base-line-height;
         }
     }
 }
@@ -69,8 +82,8 @@
     color: darken($highlight-color, 20%);
     line-height: $base-line-height;
     display: block;
-    padding-left: 20px;
 
+    // Switch back to inline when bigger
     @include break($normal) {
         padding-left: 0;
         display: inline-block;
@@ -156,7 +169,6 @@
 
 .post-meta {
     font-size: $small-font-size;
-    margin-top: 1.5*$base-line-height;
     font-style: italic;
 
     // &::before {
@@ -189,6 +201,9 @@ $home-break: 500px;
         padding-bottom: 2*$spacing-unit;
     }
 
+    img.logo {
+        width: 160px;
+    }
 }
 
 /**
@@ -268,7 +283,8 @@ ul.post-list {
 .post-content > p,
 .post-content > ul,
 .post-content > hr,
-.post-meta {
+.post-meta,
+.footnotes {
     padding-right: 2*$spacing-unit;
     // margin-left: 3*$spacing-unit;
     max-width: $reading-width;
@@ -308,6 +324,11 @@ ul.post-list {
     }
 }
 
+.post-content p:first-child {
+    letter-spacing: 0.5px;
+    font-style: italic;
+}
+
 .post-header {
     margin-bottom: $spacing-unit;
 }
@@ -328,6 +349,7 @@ ul.post-list {
 .post-content {
     word-break: break-word;
     position: relative;         // For the TOC
+    margin-bottom: 1.5*$base-line-height;
 
     h2, h3, h4 {
         position: relative;
@@ -381,8 +403,16 @@ ul#markdown-toc {
             letter-spacing: 0.5px;
         }
 
+        // Nested lists (sub-headings)
         ul {
-            padding-left: 1em;
+            padding-top: 0.4em;
+            padding-left: 0.5em;
+            font-size: 0.8em;
+
+            // Hide more than H2
+            ul {
+                display: none;
+            }
         }
 
         li {
