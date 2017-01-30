@@ -125,10 +125,8 @@ _That is all_.
 nothing to you, in which case you should have a look at the Spacemacs
 [documentation][spacemacs-doc], it's really good.)
 
-[spacemacs-doc]: http://spacemacs.org/doc/QUICK_START
-
 The most productive IDE I know of for developing with Lisp is Emacs. Nothing
-else I've used comes close. For any launage in fact. Got something better? Let
+else I've used comes close. For any language in fact. Got something better? Let
 me know! There are loads of other articles around describing how to setup Emacs
 for Lisp development, so go and read:
 - <http://nullprogram.com/blog/2010/01/15/>
@@ -141,6 +139,8 @@ I've never done so, and can't comment.
 Even more alternatively, use a full-blown CL IDE, such as Allegro or LispWorks.
 If you're used to using something like Visual Studio, or Eclipse, you'll
 probably want this option.
+
+[spacemacs-doc]: http://spacemacs.org/doc/QUICK_START
 
 
 ## Done!
@@ -165,7 +165,9 @@ SBCL is the thing that "runs" CL code. It contains, among other things, an
 interpreter, a compiler, and a REPL interface. But SBCL is more than that --
 the [docs][sbcl-docs] are pretty good. Quicklisp lets you easily install
 libraries. Spacemacs provides a Common Lisp development environment,
-including [SLIME][slime], with enhanced SBCL support.
+including [SLIME][slime], with enhanced SBCL support -- type `M-x slime` to run
+it!
+
 
 [sbcl-docs]: http://www.sbcl.org/manual/index.html
 [slime]: https://common-lisp.net/project/slime/
