@@ -23,6 +23,9 @@ url: "http://lispmethods.com" # the base hostname & protocol for your site, e.g.
 # twitter_username: rmhsilva
 # github_username: rmhsilva
 
+# Analytics (production mode only)
+google_analytics: UA-42722262-2
+
 # Build settings
 permalink: :title.html
 markdown: kramdown

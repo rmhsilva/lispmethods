@@ -87,16 +87,20 @@ as this makes development way easier...
 For more details about how libraries work, see [Libraries]({% post_url
 2017-01-29-libraries %}). Assuming we're in SBCL and Quicklisp has been
 installed, lets just install a few useful ones now:
-- Loads of utilities ([alexandria](#)) `(ql:quickload :alexandria)`
-- Regular expressions ([cl-ppcre](#)) `(ql:quickload :cl-ppcre)`
-- Clojure-like arrow macros ([cl-arrows](#)) `(ql:quickload :cl-arrows)`
-- Nicer pathnames ([fad](#)) `(ql:quickload :fad)`
+- Loads of utilities ([alexandria][alex]) `(ql:quickload :alexandria)`
+- Regular expressions ([cl-ppcre][ppcre]) `(ql:quickload :cl-ppcre)`
+- Clojure-like arrow macros ([cl-arrows][arrows]) `(ql:quickload :cl-arrows)`
+- String manipulation ([cl-strings][strings]) `(ql:quickload :cl-strings)`
 
 I'll probably talk about these libraries in future articles, and will link back
 here when they're ready!
 
 [ql-inst]: https://www.quicklisp.org/beta/#installation
 [ql-main]: https://www.quicklisp.org/beta/
+[alex]: https://common-lisp.net/project/alexandria/
+[ppcre]: http://weitz.de/cl-ppcre/
+[arrows]: https://github.com/nightfly19/cl-arrows
+[strings]: https://github.com/diogoalexandrefranco/cl-strings
 
 
 ## IDE
