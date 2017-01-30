@@ -47,30 +47,20 @@ $header-height: 100px;
  */
 .site-nav {
     max-width: $content-width;
+    position: relative;
+    @extend %clearfix;
 
-    // Move the menu down
-    @include break($medium) {
-        top: 1.2*$base-line-height;
-    }
-
-    // Position the menu
+    // Position the nav. 10px seems about right..
     .trigger {
         position: absolute;
         right: 0;
-        top: $base-line-height;
+        top: 10px;
         text-align: right;
-        // float: right;
-        // max-width: 5em;
         margin-right: 2 * $spacing-unit;
-
-        @include break($medium) {
-            // max-width: none;
-            margin-right: 4 * $spacing-unit;
-        }
 
         // Move down when switch to inline again
         @include break($normal) {
-            top: 2*$base-line-height;
+            top: 10px + $base-line-height;
         }
     }
 }
@@ -353,6 +343,7 @@ ul.post-list {
 
     h2, h3, h4 {
         position: relative;
+        line-height: 1.2em;
     }
 
     h2 {
