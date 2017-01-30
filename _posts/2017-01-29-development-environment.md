@@ -111,7 +111,7 @@ C#, or maybe Mono. Really all you need is a programming editor, but what you
 actually *want* is a tool that integrates tightly with Common Lisp, greatly
 enhancing the development experience.
 
-*Opinionated stuff here, feel free to ignore it if that bothers you*
+*Opinionated stuff here, feel free to ignore it if that bothers you.*
 
 Download and install the following:
 - Emacs (version >25)
