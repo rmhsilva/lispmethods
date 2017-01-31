@@ -88,6 +88,7 @@ as this makes development way easier...
 For more details about how libraries work, see [Libraries]({% post_url
 2017-01-29-libraries %}). Assuming we're in SBCL and Quicklisp has been
 installed, lets just install a few useful ones now:
+
 - Loads of utilities ([alexandria][alex]) `(ql:quickload :alexandria)`
 - Regular expressions ([cl-ppcre][ppcre]) `(ql:quickload :cl-ppcre)`
 - Clojure-like arrow macros ([cl-arrows][arrows]) `(ql:quickload :cl-arrows)`
@@ -130,6 +131,7 @@ The most productive IDE I know of for developing with Lisp is Emacs. Nothing
 else I've used comes close. For any language in fact. Got something better? Let
 me know! There are loads of other articles around describing how to setup Emacs
 for Lisp development, so go and read:
+
 - <http://nullprogram.com/blog/2010/01/15/>
 - <http://emacsrocks.com/>
 - <https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/common-lisp>
@@ -158,9 +160,9 @@ Was that less than 5 minutes?
 Great, so now you're totally set up for developing Common Lisp. Lets recap what
 you actually have installed:
 
-* SBCL, a popular Common Lisp "implementation"
-* Quicklisp, a library manager
-* Spacemacs, a modern Emacs configuration
+- SBCL, a popular Common Lisp "implementation"
+- Quicklisp, a library manager
+- Spacemacs, a modern Emacs configuration
 
 SBCL is the thing that "runs" CL code. It contains, among other things, an
 interpreter, a compiler, and a REPL interface. But SBCL is more than that --
@@ -190,6 +192,7 @@ as they all must implement the features specified by ANSI, you are guaranteed
 some level of portability between implementations. However, the extra stuff
 bundled with implementations varies, and so you cannot expect any non-standard
 features to be portable. Notably:
+
 - Multi-threading ability
 - Unicode support
 - Executable format
@@ -201,6 +204,7 @@ stable, it has fantastic editor integration (e.g. via SLIME in Emacs), and
 compiles to well optimised native code. It also runs on lots of platforms.
 
 Other interesting Common Lisps:
+
 - [ECL](https://common-lisp.net/project/ecl/), which compiles down to C
 - [Clasp](https://github.com/drmeister/clasp), for its C/C++ inter-operability
 

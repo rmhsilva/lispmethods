@@ -16,7 +16,11 @@ layout: default
             Thanks for reading!
         </p>
         <p class="post-meta">
-            <span>Updated:</span> <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>
+            {% if page.updated %}
+            <span>Updated:</span> <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="dateModified">{{ page.updated | date: "%b %-d, %Y" }}</time>
+            {% else %}
+            <span>Published:</span> <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>
+            {% endif %}
         </p>
     </div>
 

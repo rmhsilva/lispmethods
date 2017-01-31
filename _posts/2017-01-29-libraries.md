@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Libraries
+updated: 2017-01-31
 ---
 
 Answers to the inevitable questions asked, by people new to Common Lisp, about
@@ -39,6 +40,7 @@ doing something specific, designed to be used as part of a larger library or
 application.
 
 Common Lisp has some further definitions:
+
 - **Packages** are defined by the Common Lisp standard as containers for
   symbols, similar to C++ namespaces. Key point: one does not 'install' a
   package; that'd be silly, it's just a group of names. Instead, the code that
@@ -73,32 +75,24 @@ You'll definitely come across these at some point.
 [quicklisp]: https://www.quicklisp.org/
 
 
-
-### Quicklisp
-
-> Experimenting with and using open-source libraries is so easy in
-> favourite-language-here. I want that in Common Lisp!
-
-Most languages deal with this stuff quite differently. Python has pip, which is
-fairly well established as the Python package manager. If you want to share some
-code, you put it on PyPi, and people can find it with `pip search`. Node.js
-programmers use NPM (or yarn, if they're cool), and the NPM package registry. C
-and C++ programmers must rely on their system's package manager to provide
-development libraries, or just download them manually.
-
-Common lisp has traditionally been more like C/C++ in this respect - if you
-wanted to use someone's libary you downloaded it and put it somewhere your lisp
-implementation could find it.
-
-These days we have [Quicklisp](http://quicklisp.org)
-
-
 ### ASDF
 
 ASDF (Another System Definition Facility) is included in most popular CL
-implementations, including SBCL.
+implementations, including SBCL. It is the most commonly used System definition
+tool, and most open source projects will come with an ASDF system definition.
+This definition, contained in a `.asd` file, probably contains a number of
+things, including:
 
-Process (draft)
+- The project author, description, license, and other similar data
+- A list of files in the system
+- Any dependencies between files
+- A description of how to run unit tests
+
+
+#### Developing with ASDF
+
+Process:
+
 - create the system definition file (.asd extension)
 - add the containing folder to asdf's load path. The easiest way is to do `(push
   *default-pathname-defaults* asdf:*central-registry*)`
@@ -114,19 +108,42 @@ package somewhere else. Feels like a C header file.
 
 The Slime interactivity with ASDF isn't amazing. The current path has to be
 pushed onto the central repo, and load op has to be called manually. There
-should kinda be a slime-load-project type command...
+should be a `slime-load-project` type command.
 
-## Examples
-
-### Packages
-
-Creating, specifying dependencies, importing names
 
 ### Quicklisp
 
-Install and search for packages
+> Experimenting with and using open-source libraries is so easy in
+> favourite-language-here. I want that in Common Lisp!
 
-#### blach
+Most languages deal with this stuff quite differently. Python has pip, which is
+fairly well established as the Python package manager. If you want to share some
+code, you put it on PyPI, and people can find it with `pip search`. Node.js
+programmers use NPM (or yarn, if they're cool), and the NPM package registry. C
+and C++ programmers must rely on their system's package manager to provide
+development libraries, or just download them manually.
+
+Common lisp has traditionally been more like C/C++ in this respect - if you
+wanted to use someone's libary you downloaded it and put it somewhere your lisp
+implementation could find it.
+
+These days we have [Quicklisp](http://quicklisp.org).
+
+
+## Examples
+
+How to create and use Packages, define Systems, and install stuff with
+Quicklisp!
+
+*In progress...*
+
+### Packages
+
+Creating, specifying dependencies, importing names!
+
+### Quicklisp
+
+Install and search for packages!
 
 ### System definitions
 
