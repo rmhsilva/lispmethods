@@ -18,8 +18,10 @@ email: ric@rmhsilva.com
 description: > # this means to ignore newlines until "baseurl:"
   Articles about Common Lisp, and how to accomplish useful, day-to-day
   programming tasks with it.
+
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://lispmethods.com" # the base hostname & protocol for your site, e.g. http://example.com
+url: "http://lispmethods.com"
+
 # twitter_username: rmhsilva
 # github_username: rmhsilva
 
@@ -28,6 +30,9 @@ google_analytics: UA-42722262-2
 
 # Build settings
 permalink: :title.html
+kramdown:
+  input: kramdown
+  hard_wrap: false
 markdown: kramdown
 theme: minima
 gems:
@@ -35,3 +40,14 @@ gems:
 exclude:
   - Gemfile
   - Gemfile.lock
+
+
+# Fixed by github:
+lsi: false
+safe: true
+incremental: false
+highlighter: rouge
+gist:
+  noscript: false
+kramdown:
+  math_engine: mathjax

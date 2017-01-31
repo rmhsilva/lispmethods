@@ -15,6 +15,7 @@ menu (the correct choice is always tiramisu).
 {:toc}
 
 Read on to find out how to:
+
 - Install a Common Lisp implementation
 - Add some useful libraries
 - Install a development environment
