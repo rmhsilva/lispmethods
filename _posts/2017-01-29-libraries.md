@@ -35,6 +35,10 @@ Read on for the info, or go straight to the [examples](#examples).
 
 ## Definitions
 
+# TODO
+This really needs to be more detailed. Link to other articles about packages, in
+particular, what `CL-USER` is, etc.
+
 For the purposes of this article, a **library** is a collection of code for
 doing something specific, designed to be used as part of a larger library or
 application.
@@ -46,11 +50,11 @@ Common Lisp has some further definitions:
   package; that'd be silly, it's just a group of names. Instead, the code that
   defines the package is loaded[^1], and then the symbols in the
   package can be accessed.
-- **Systems** are *not* defined in the CL standard, but essentially they are
-  groups of code (usually including one or more package definitions), and any
-  information required to build and run the code (dependencies, unit tests,
-  etc). They typically also include 'extra' information about the code (author,
-  license, system name, etc), but are basically a way to structure a project.
+- **Systems** are *not* defined in the CL standard, but they have been around as
+  a concept for decades. Essentially they are groups of code (usually including
+  one or more package definitions), and any information required to build and
+  run the code (dependencies, unit tests, etc). They typically also include
+  'extra' information about the code (author, license, system name, etc).
 
 Want more? Go and read <http://weitz.de/packages.html>, a fantastic and detailed
 description of how all this stuff works. Also useful is
@@ -58,7 +62,7 @@ the [PCL chapter on packages][pcl-packages].
 
 [pcl-packages]: http://gigamonkeys.com/book/programming-in-the-large-packages-and-symbols.html
 
-[^1]: For example, by evaluating the code in a REPL, or with a call to `load`
+[^1]: For example, by evaluating the code in a REPL, or with a call to `load`.
 
 
 ## Tools
@@ -137,14 +141,91 @@ Quicklisp!
 
 *In progress...*
 
+We will build a very small web application based on [ningle][ningle-web] to
+demonstrate how everything hangs together in Common Lisp. This web app will do
+just one thing: TODO
+
+We shall call our the application... `bobbio`. You'll need to create a few
+files:
+
+* `bobbio.asd` (the bobbio system definition)
+* `bobbio.lisp` (the main lisp source file)
+* `web.lisp` (the web application code)
+
+[ningle-web]: https://github.com/fukamachi/ningle
+
+
 ### Packages
 
-Creating, specifying dependencies, importing names!
+We'll split up our little web app into two packages -- one to hold the web
+stuff, and one to hold the backend functionality.
 
-### Quicklisp
+Put the following into `bobbio.lisp`:
 
-Install and search for packages!
+~~~ common_lisp
+;;;; bobbio.lisp
+(defpackage :bobbio
+  (:use #:cl)
+  (:export
+   :get-message))
+
+(in-package :bobbio)
+
+(defun random-char ()
+  "Return a random character"
+  (code-char (+ 60 (random 26))))
+
+(defun get-message ()
+  (format nil "Your random number is: ~a" (random-char)))
+~~~
+
+This is a fairly minimal package defintion possible; it creates a package with
+the `:bobbio` keyword using the (defpackage)[clhs-defpackage] macro, and then
+changes the current "namespace" to the package, using
+(in-package)[clhs-defpackage]. One symbol, `get-message`, is exported by the
+package -- this is **the only** symbol that will be visible to other packages.
+
+After that, the file just defines a couple of functions we'll use later on.
+
+However, `defpackage` can do *lots* of other things as well, much of which
+you'll probably need at some point. For example, you'll probably want to import
+things.
+
+Put the following into `web.lisp`:
+
+~~~ common_lisp
+;;;; web.lisp
+(defpackage :bobbio.web
+  (:use #:cl)
+  (:export
+   :start-server)
+  (:import-from :bobbio :get-message))
+
+(in-package :bobbio.web)
+
+(defvar *app* (make-instance 'ningle:<app>))
+
+(setf (ningle:route *app* "/")
+      (get-message))
+
+(defun start-server ()
+  (clack:clackup *app*))
+~~~
+
+This one is slightly more complicated - 
+
+
 
 ### System definitions
 
 Create an ASDF file!
+
+
+### Quicklisp
+
+Quicklisp uses ASDF definitions to load things!
+
+Install and search for packages!
+
+Symlink bobbio into ~/quicklisp/local-projects
+

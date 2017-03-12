@@ -24,10 +24,10 @@ The entire process should take less than 5 minutes (I'm ignoring download time
 -- convenient right?).
 
 
-{:comment}
-TODO: give the brief overview of the essential parts. Then talk about the
-details, using Roswell, etc. Make it something that will have lasting value.
-{:endcomment}
+<!-- {:comment} -->
+<!-- TODO: give the brief overview of the essential parts. Then talk about the -->
+<!-- details, using Roswell, etc. Make it something that will have lasting value. -->
+<!-- {:endcomment} -->
 
 
 ## Installing Lisp
