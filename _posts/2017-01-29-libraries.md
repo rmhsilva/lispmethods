@@ -4,8 +4,8 @@ title: Libraries
 updated: 2017-01-31
 ---
 
-Answers to the inevitable questions asked, by people new to Common Lisp, about
-how to find, use and create libraries.
+Answers to the inevitable questions asked about how to find, use and create
+Common Lisp libraries.
 
 * toc
 {:toc}
@@ -25,90 +25,95 @@ See http://tychoish.com/post/using-asdf-install-with-sbcl/ as well.
 
 {:/comment}
 
-"Libraries" are a tricky concept in Common Lisp, probably the language has been
-around for ages and the preferred way of doing things has evolved. This article
-aims to give you some insight into how things are done these days, and hopefully
-clear up some confusion.
+"Libraries" are a tricky concept in Common Lisp, probably as the language has
+been around for ages and the preferred way of doing things has evolved. This
+article aims to give you some insight into how things are done these days, and
+hopefully clear up some confusion.
 
 Read on for the info, or go straight to the [examples](#examples).
 
 
 ## Definitions
 
-# TODO
+{::comment}
+TODO:
 This really needs to be more detailed. Link to other articles about packages, in
 particular, what `CL-USER` is, etc.
+{:/comment}
 
 For the purposes of this article, a **library** is a collection of code for
 doing something specific, designed to be used as part of a larger library or
-application.
-
-Common Lisp has some further definitions:
-
-- **Packages** are defined by the Common Lisp standard as containers for
-  symbols, similar to C++ namespaces. Key point: one does not 'install' a
-  package; that'd be silly, it's just a group of names. Instead, the code that
-  defines the package is loaded[^1], and then the symbols in the
-  package can be accessed.
-- **Systems** are *not* defined in the CL standard, but they have been around as
-  a concept for decades. Essentially they are groups of code (usually including
-  one or more package definitions), and any information required to build and
-  run the code (dependencies, unit tests, etc). They typically also include
-  'extra' information about the code (author, license, system name, etc).
+application. This is a pretty vague definition. Common Lisp has a few ways of
+grouping code together. Here is a brief overview.
 
 Want more? Go and read <http://weitz.de/packages.html>, a fantastic and detailed
 description of how all this stuff works. Also useful is
 the [PCL chapter on packages][pcl-packages].
+
+### Packages
+
+"Packages" are defined by the Common Lisp standard as containers for symbols,
+similar to C++ namespaces. Key point: one does not 'install' a package; that'd
+be silly, it's just a group of names. Instead, the code that defines the package
+is loaded[^1], and then the symbols in the package can be accessed. The package
+definition includes the symbols a package exports (makes "public"), as well as
+which symbols it needs from other packages.
+
+When you start your Lisp REPL, you probably end up with a prompt that contains
+something like `CL-USER`. This indicates that you are in the `CL-USER`
+*package*, which is the default package intended for general experimentation.
+See [PCL][pcl-packages] for more details.
+
+You will almost always want to define a package to hold code you write. When
+your code is spread across multiple files, the preferable organisational style
+is to use one single `package.lisp` file which contains the package definitions.
+Then each source file simply calls `in-package` to declare which package its
+code lives in. The other option is to use a single package definition per file.
+This means packages never span multiple files, and dependencies are more clearly
+indicated. However it can feel a little cumbersome. There's something nice about
+specifying a package somewhere else. And it functions as a useful "API" /
+dependency tree for all the files.
+
+
+### Systems
+
+"Systems" are *not* defined in the CL standard, but they have been around as a
+concept for decades. Essentially they are groups of code (usually including one
+or more package definitions), and any information required to build and run the
+code (dependencies, unit tests, etc). They typically also include 'extra'
+information about the code (author, license, system name, etc).
 
 [pcl-packages]: http://gigamonkeys.com/book/programming-in-the-large-packages-and-symbols.html
 
 [^1]: For example, by evaluating the code in a REPL, or with a call to `load`.
 
 
-## Tools
+## ASDF
 
-You'll definitely come across these at some point.
+[ASDF][asdf] (Another System Definition Facility) is a kind of build tool on
+steroids. You can use it to do lots of things, but it's commonly used to define
+how to build and load Common Lisp libraries or applications.
 
-- [ASDF][asdf] is a kind of build tool on steroids. You can use it to do lots of
-  things, but it's commonly used to define how to build and load Common Lisp
-  libraries or applications.
-- [Quicklisp][quicklisp] is a library manager for Common Lisp that lets you
-  easily install libraries.
-  
-[asdf]: https://common-lisp.net/project/asdf/
-[quicklisp]: https://www.quicklisp.org/
-
-
-### ASDF
-
-ASDF (Another System Definition Facility) is included in most popular CL
-implementations, including SBCL. It is the most commonly used System definition
-tool, and most open source projects will come with an ASDF system definition.
-This definition, contained in a `.asd` file, probably contains a number of
-things, including:
+ASDF is included in most popular CL implementations, including SBCL. It is the
+de-facto system definition tool, and most open source projects will come with an
+ASDF system definition. This definition, contained in a `.asd` file, probably
+includes a number of things, such as:
 
 - The project author, description, license, and other similar data
 - A list of files in the system
 - Any dependencies between files
 - A description of how to run unit tests
 
+[asdf]: https://common-lisp.net/project/asdf/
 
-#### Developing with ASDF
+### Developing with ASDF
 
 Process:
 
 - create the system definition file (.asd extension)
 - add the containing folder to asdf's load path. The easiest way is to do `(push
   *default-pathname-defaults* asdf:*central-registry*)`
-- then you can do `(asdf:oos 'asdf:load-op 'package-name)`
-
-
-The organisation style I prefer is to use one single `package.lisp` file which
-contains the package defintions. Then each file simply calls `in-package`. The
-other option is to use a single package definition per file. This means packages
-never span multiple files, and dependencies are more clearly indicated. However
-it can feel a little cumbersome. There's something nice about specifying a
-package somewhere else. Feels like a C header file.
+- then you can do `(asdf:oos 'asdf:load-op 'system-name)` to "load" the system
 
 The Slime interactivity with ASDF isn't amazing. The current path has to be
 pushed onto the central repo, and load op has to be called manually. There

@@ -11,23 +11,29 @@ reasons people are turned off by the language in general. Which is a shame
 really. It's like being put off desert because there are too many choices on the
 menu (the correct choice is always tiramisu).
 
+> Why would I even bother?
+
+The multiple very good reasons to use Common Lisp are well described in several
+other web-sites, so I won't bother. Actually, here's just one -- **it's more fun
+than Minecraft**.
+
 * toc
 {:toc}
 
-Read on to find out how to:
+Anyway, this website is about getting stuff done, so here are the main
+components required to get up and running with Lisp:
 
 - Install a Common Lisp implementation
-- Add some useful libraries
+- Install Quicklisp and get some useful libraries
 - Install a development environment
 
-The entire process should take less than 5 minutes (I'm ignoring download time
--- convenient right?).
+The entire process should take less than 5 minutes.
 
-
-<!-- {:comment} -->
-<!-- TODO: give the brief overview of the essential parts. Then talk about the -->
-<!-- details, using Roswell, etc. Make it something that will have lasting value. -->
-<!-- {:endcomment} -->
+**Note:** If all you really want to do is *write some Lisp now*, then check
+out [Portacle][portacle], which packages up a CL development environment into
+one download. Super handy, great if you just want to get into Lisp quickly.
+However if you want to set up a more permanent/configurable development
+environment, you'll want to read on...
 
 
 ## Installing Lisp
@@ -38,7 +44,7 @@ Let's answer the immediate practical question:
 
 And in most cases, the answer is this:
 
-> Google "Steel Bank Common Lisp", and install it. Now.
+**Google "Steel Bank Common Lisp", and install it. Now.**
 
 Or just click [this link](http://www.sbcl.org/platform-table.html) to go
 straight to the download page. Or use your favourite package manager, which will
@@ -73,29 +79,34 @@ Hello
 * (quit)
 ~~~
 
-Next up - getting libraries.
 
-
-## Libraries
+## Quicklisp
 
 Currently the best way to explore and experiment with Common Lisp libraries is
 [Quicklisp][ql-main]. Think of it like Python's `pip`, but with more parentheses.
 
-Download Quicklisp and follow the install instructions [here][ql-inst]. Make sure you
-do the bit that adds Quicklisp to SBCL's startup script (`ql:add-to-init-file`)
-as this makes development way easier...
+Download Quicklisp and follow the install instructions [here][ql-inst]. Make
+sure you do the bit that adds Quicklisp to SBCL's startup script
+(`ql:add-to-init-file`) as this makes development way easier... (it makes
+quicklisp available in any new SBCL instance you create)
 
-For more details about how libraries work, see [Libraries]({% post_url
-2017-01-29-libraries %}). Assuming we're in SBCL and Quicklisp has been
-installed, lets just install a few useful ones now:
+Most package managers are invoked from the command line. This is not the case
+for Quicklisp. Like most things in Common Lisp, you use it from *inside* the
+REPL. So, from inside an SBCL REPL, lets install a few useful libraries now by
+running the `ql:quickload` *function* with the package we want to install:
 
 - Loads of utilities ([alexandria][alex]) `(ql:quickload :alexandria)`
 - Regular expressions ([cl-ppcre][ppcre]) `(ql:quickload :cl-ppcre)`
 - Clojure-like arrow macros ([cl-arrows][arrows]) `(ql:quickload :cl-arrows)`
 - String manipulation ([cl-strings][strings]) `(ql:quickload :cl-strings)`
 
+Note: this kind of workflow (working entirely in the REPL) is really nice once
+you get used to it. The result is less context switching, fewer external tools
+required, etc.
+
 I'll probably talk about these libraries in future articles, and will link back
-here when they're ready!
+here when they're ready! For details about how libraries "work" in Common Lisp,
+see [Libraries]({% post_url 2017-01-29-libraries %}).
 
 [ql-inst]: https://www.quicklisp.org/beta/#installation
 [ql-main]: https://www.quicklisp.org/beta/
@@ -109,7 +120,7 @@ here when they're ready!
 
 Now that "Common Lisp" is installed, you'll want something to develop with. If
 this was a C# tutorial, this is where you'd be told to install Microsoft Visual
-C#, or maybe Mono. Really all you need is a programming editor, but what you
+Studio, or maybe Mono. Really all you need is a programming editor, but what you
 actually *want* is a tool that integrates tightly with Common Lisp, greatly
 enhancing the development experience.
 
@@ -123,9 +134,9 @@ And then enable the 'common-lisp' layer in Spacemacs.
 
 _That is all_.
 
-(If you have now idea what Spacemacs is, "enabling a layer" probably means
-nothing to you, in which case you should have a look at the Spacemacs
-[documentation][spacemacs-doc], it's really good.)
+(If you have no idea what Spacemacs is, "enabling a layer" probably means
+nothing to you, in which case you should have a look at the
+Spacemacs [documentation][spacemacs-doc]; it's really good.)
 
 The most productive IDE I know of for developing with Lisp is Emacs. Nothing
 else I've used comes close. For any language in fact. Got something better? Let
@@ -139,9 +150,9 @@ for Lisp development, so go and read:
 Alternatively, you could use Vim + [Slimv](https://github.com/kovisoft/slimv).
 I've never done so, and can't comment.
 
-Even more alternatively, use a full-blown CL IDE, such as Allegro or LispWorks.
-If you're used to using something like Visual Studio, or Eclipse, you'll
-probably want this option.
+Even more alternatively, use a full-blown commercial CL implementation and IDE,
+such as Allegro or LispWorks. If you're used to using something like Visual
+Studio, or Eclipse, you'll probably want this option.
 
 [spacemacs-doc]: http://spacemacs.org/doc/QUICK_START
 
@@ -206,15 +217,31 @@ compiles to well optimised native code. It also runs on lots of platforms.
 Other interesting Common Lisps:
 
 - [ECL](https://common-lisp.net/project/ecl/), which compiles down to C
-- [Clasp](https://github.com/drmeister/clasp), for its C/C++ inter-operability
+- [Clasp](https://github.com/drmeister/clasp), for its C/C++ inter-op
 
+[cl-ansi]: https://standards.incits.org/apps/group_public/project/details.php?project_id=1012
 
 ### Roswell
+
+If you're getting started with Lisp I absolutely recommend just installing one
+implementation, as described above, and getting familiar with it. However, at
+some point you will probably want to use/test a different implementation.
 
 [Roswell](https://github.com/roswell/roswell) is an actively developed "Lisp
 implementation installer/manager, launcher, and much more", which is becoming
 more popular for full stack Common Lisp development. Among other things, it lets
-you install multiple Lisp implementations on one machine.
+you install multiple Lisp implementations on one machine, and easily swap
+between them.
+
+Some people suggest using Roswell from the start, but frankly, it's just extra
+complexity that isn't helpful until you are developing Lisp more seriously.
 
 
-[cl-ansi]: https://standards.incits.org/apps/group_public/project/details.php?project_id=1012
+### TL; DR
+
+> Skip all that boring stuff, and let me write some Lisp!
+
+You probably want Portacle. [https://shinmera.github.io/portacle/][portacle]
+
+[portacle]: https://shinmera.github.io/portacle/
+
