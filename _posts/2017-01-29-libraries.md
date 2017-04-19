@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Libraries
-updated: 2017-01-31
+title: Source Code Organisation
+updated: 2017-04-19
 ---
 
-Answers to the inevitable questions asked about how to find, use and create
-Common Lisp libraries.
+Answers to some commonly asked questions about how to organise Common Lisp code,
+and use or create libraries.
 
 * toc
 {:toc}
@@ -30,7 +30,10 @@ been around for ages and the preferred way of doing things has evolved. This
 article aims to give you some insight into how things are done these days, and
 hopefully clear up some confusion.
 
-Read on for the info, or go straight to the [examples](#examples).
+We'll start with an overview of some fundamental concepts and definitions, then
+look at source code organisation styles, and finally talk about using open
+source libraries. Read on for the info, or go straight to
+the [examples](#examples).
 
 
 ## Definitions
@@ -44,35 +47,47 @@ particular, what `CL-USER` is, etc.
 For the purposes of this article, a **library** is a collection of code for
 doing something specific, designed to be used as part of a larger library or
 application. This is a pretty vague definition. Common Lisp has a few ways of
-grouping code together. Here is a brief overview.
+grouping code together to create libraries and applications. Here is a brief
+overview of the main concepts you'll need.
 
-Want more? Go and read <http://weitz.de/packages.html>, a fantastic and detailed
-description of how all this stuff works. Also useful is
+For more detailed info, go and read <http://weitz.de/packages.html>, a fantastic
+and detailed description of how all this stuff works. Also useful is
 the [PCL chapter on packages][pcl-packages].
+
 
 ### Packages
 
-"Packages" are defined by the Common Lisp standard as containers for symbols,
-similar to C++ namespaces. Key point: one does not 'install' a package; that'd
-be silly, it's just a group of names. Instead, the code that defines the package
-is loaded[^1], and then the symbols in the package can be accessed. The package
-definition includes the symbols a package exports (makes "public"), as well as
-which symbols it needs from other packages.
+"Packages" are defined by the Common Lisp standard as **containers for symbols**
+(see [Symbols](/symbols.html) for more info about what these magical things
+are), similar to C++ namespaces. Key point: one does not 'install' a package;
+that'd be silly, it's just a group of (effectively) names. Instead, the code
+that *defines* the package is loaded ([more details](#loading-code)), and then
+the symbols in the package can be accessed. We'll see how to do that later.
 
 When you start your Lisp REPL, you probably end up with a prompt that contains
 something like `CL-USER`. This indicates that you are in the `CL-USER`
-*package*, which is the default package intended for general experimentation.
-See [PCL][pcl-packages] for more details.
+*package*, which is the default package intended for general experimentation,
+and has all the standard Common Lisp symbols available. See [PCL][pcl-packages]
+for more details.
 
-You will almost always want to define a package to hold code you write. When
-your code is spread across multiple files, the preferable organisational style
-is to use one single `package.lisp` file which contains the package definitions.
-Then each source file simply calls `in-package` to declare which package its
-code lives in. The other option is to use a single package definition per file.
-This means packages never span multiple files, and dependencies are more clearly
-indicated. However it can feel a little cumbersome. There's something nice about
-specifying a package somewhere else. And it functions as a useful "API" /
-dependency tree for all the files.
+Packages are not essential for writing Lisp (you could just split up files and
+LOAD each one individually), but packages offer far better code organisation.
+
+
+### Loading Code
+
+Developing and running Common Lisp code is different from most languages in use
+today. We develop applications by building upon a Lisp "image", and we use
+source code files as a way to record the building steps. Sort of.
+
+Anyway, the thing to remember is that when you start a new Lisp instance (for
+example, by running `sbcl` at the command line), it comes up blank, with no user
+code. In order to run things, you must *load* code into it (or define code
+directly from the REPL, of course). This is typically done by either using the
+Common Lisp [LOAD][clhs-load] function, or using ASDF to load a system (see
+below).
+
+[clhs-load]: http://clhs.lisp.se/Body/f_load.htm
 
 
 ### Systems
@@ -85,7 +100,21 @@ information about the code (author, license, system name, etc).
 
 [pcl-packages]: http://gigamonkeys.com/book/programming-in-the-large-packages-and-symbols.html
 
-[^1]: For example, by evaluating the code in a REPL, or with a call to `load`.
+
+## Using Packages
+
+Remember that Common Lisp packages are similar to namespaces, or python modules.
+Knowing this, you will almost always want to define a package to hold code you
+write.
+
+When your code is spread across multiple files, the preferable
+organisational style is to use one single `package.lisp` file which contains the
+package definitions. Then each source file simply calls `in-package` to declare
+which package its code lives in. The other option is to use a single package
+definition per file. This means packages never span multiple files, and
+dependencies are more clearly indicated. However it can feel a little
+cumbersome. There's something nice about specifying a package somewhere else.
+And it functions as a useful "API" / dependency tree for all the files.
 
 
 ## ASDF
@@ -148,7 +177,7 @@ Quicklisp!
 
 We will build a very small web application based on [ningle][ningle-web] to
 demonstrate how everything hangs together in Common Lisp. This web app will do
-just one thing: TODO
+just one thing: give us a (probably not cryptographically secure) random number.
 
 We shall call our the application... `bobbio`. You'll need to create a few
 files:
