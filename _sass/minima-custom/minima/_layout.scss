@@ -272,6 +272,7 @@ ul.post-list {
 .post-content > h4,
 .post-content > p,
 .post-content > ul,
+.post-content > ol,
 .post-content > hr,
 .post-meta,
 .footnotes {
@@ -284,6 +285,18 @@ ul.post-list {
         margin-left: 0.27*$normal;
     }
 }
+
+// ol gets more margin
+/*
+.post-content > ol{
+    padding-right: 2*$spacing-unit;
+    max-width: $reading-width;
+
+    @include break($normal) {
+        margin-left: 0.29*$normal;
+    }
+}
+*/
 
 .post-main {
     // Blockquotes with hanging bar things

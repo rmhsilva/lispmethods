@@ -49,7 +49,7 @@ $spacing-unit: 10px;
 $content-width: 960px;
 
 // Max width of text meant to be read
-$reading-width: 550px;
+$reading-width: 0.60*$content-width;
 
 // The amount lists and blockquotes are indented.
 $indent-amount: 40px;
