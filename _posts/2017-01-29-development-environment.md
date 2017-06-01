@@ -4,7 +4,7 @@ title: Getting Started With Common Lisp
 ---
 
 An overview of how to quickly set up a development environment and get started
-with Common Lisp.
+with Common Lisp. Install a lisp, add some libraries, write some code!
 
 Getting started developing with Common Lisp is tricky, and probably one of the
 reasons people are turned off by the language in general. Which is a shame

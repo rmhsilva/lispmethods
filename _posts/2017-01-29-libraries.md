@@ -1,11 +1,12 @@
 ---
 layout: post
 title: Source Code Organisation
-updated: 2017-04-19
+updated: 30/05/2017
 ---
 
 Answers to some commonly asked questions about how to organise Common Lisp code,
-and use or create libraries.
+and use or create libraries. Covering systems, packages, ASDF, Quicklisp, and
+more.
 
 * toc
 {:toc}
@@ -113,21 +114,57 @@ When your code is spread across multiple files, the preferred organisational
 style is to use one single `package.lisp` file at the top level of your project
 which contains the package definitions. Then each source file simply declares
 which package its symbols lives in. The other option is to use a single package
-definition per file. This means packages never span multiple files, and
-dependencies are more clearly indicated. However it can feel a little cumbersome
-as the number of files (and hence) packages grows. Using a single file to define
-all packages often feels easier to organise, and also provides a basic but
-useful "API" / dependency tree for all the files.
+definition per source code file. This means packages never span multiple files,
+and dependencies are more clearly indicated. However it can feel a little
+cumbersome as the number of files and therefore packages grows. Using a single
+file to define all packages often feels easier to organise, and also provides a
+basic but useful "API" and dependency tree for all the files.
 
+### Package Definitions
 
-### Package Naming
+Packages are defined with [DEFPACKAGE][defpackage], and usually contain at
+least:
+- the package name / identifier
+- a list of symbols the package exports
+- a list of other symbols imported into the package
 
 Packages must be named with a so-called "string-designator", which can be quite
 confusing, as it results in several different styles of working with packages.
 
+~~~ common_lisp
+(defpackage :sneaky)
+(defpackage #:sneaky)
+(defpackage "sneaky")
+~~~
+
+TODO - the differences ^
+
+
 ### Accessing Symbols in Other Packages
 
-: or ::
+There are three commonly used and seen ways to refer to symbols:
+1. `bar`
+2. `foo:bar`
+3. `foo::bar`
+
+In the first case, the Lisp evaluator will search for the symbol `bar` in the
+current package, and use its value.
+
+In the second case, the symbol will be searched for in the list of symbols
+exported by the `foo` package. If it cannot be found, an error is signaled.
+
+TODO - wording:
+
+In the third case, the symbol is evaluated *in the context* of `foo`, ignoring
+the exported symbols list. This allows "unlimited" access to the symbols in
+`foo`, but should rarely (if ever) be used in code you write. If a symbol is not
+exported by a package, it probably is not meant to be used. However it is common
+to see symbols printed in this format.
+
+**Note**: when the Lisp reader reads a symbol, it *internalises* the symbol,
+which essentially means it creates a symbol of the given name in the current
+package. This can result in conflicts later if a symbol of the same name is
+imported from another package.
 
 
 ## ASDF
@@ -165,7 +202,7 @@ should be a `slime-load-project` command...
 ### Quicklisp
 
 > Experimenting with and using open-source libraries is so easy in
-> <favourite-language-here>. I want that in Common Lisp!
+> &lt;favourite-language-here&gt;. I want that in Common Lisp!
 
 Most languages deal with this stuff quite differently. Python has pip, which is
 fairly well established as the Python package manager. If you want to share some
@@ -186,20 +223,18 @@ These days we have [Quicklisp](http://quicklisp.org)!
 How to create and use Packages, define Systems, and install stuff with
 Quicklisp!
 
-*In progress...*
-
 We will build a very small web application using [ningle][ningle-web] to
 demonstrate how everything hangs together in Common Lisp. This web app will do
 just one thing: generate us a (probably not cryptographically secure) random
 character on every page refresh.
 
-We shall call our the application... `bobbio`. You'll need to create a few
+We shall call our the application... "bobbio". You'll need to create a few
 files:
 
-* `bobbio.asd` (the bobbio system definition)
-* `package.lisp` (the package definitions)
-* `bobbio.lisp` (the main lisp source file)
-* `web.lisp` (the web application code)
+* `bobbio.asd` -- the bobbio system definition
+* `package.lisp` -- the package definitions
+* `bobbio.lisp` -- the main lisp source file
+* `web.lisp` -- the web application code
 
 [ningle-web]: https://github.com/fukamachi/ningle
 
@@ -227,17 +262,19 @@ Put the following into `package.lisp`:
 ~~~
 
 This defines our two packages -- they are both quite minimal. The first form
-defines a package named `:bobbio` using the (defpackage)[clhs-defpackage] macro.
+defines a package named `:bobbio` using the [defpackage][defpackage] macro.
 One symbol, `get-message`, is exported by the package -- this is the only symbol
 that will be "visible" to other packages. The `:bobbio` package also *uses* all
 of the symbols from the `:cl` package (a nickname for `:common-lisp`), which
 means all standard Common Lisp symbols (i.e. `defun`, `setf`, etc) will be
 available.
 
+[defpackage]: TODO
+
 The `:bobbio.web` package also uses `cl` (most packages will), exports the
 `start-server` symbol, and also *imports* the `get-message` symbol from
 `bobbio`. This means that code in the `:bobbio.web` will be able to use
-`get-message` without including `bobbio:` before it.
+`get-message` as if it was defined in the `:bobbio.web` package.
 
 ### bobbio.lisp
 
@@ -252,7 +289,7 @@ Next, put the following into `bobbio.lisp`:
 
 (defun random-char ()
   "Return a random character"
-  (code-char ( ascii-value-A
+  (code-char (+ ascii-value-A
                 (random alphabet-length))))
 
 (defun get-message ()
@@ -260,8 +297,8 @@ Next, put the following into `bobbio.lisp`:
 ~~~
 
 The call to (in-package)[clhs-defpackage] changes the current "namespace" to
-`:bobbio`. After that, the file just defines a couple of functions we'll use
-later on. 
+`:bobbio`. After that, the file defines a couple of functions we'll use later
+on.
 
 ### web.lisp
 
