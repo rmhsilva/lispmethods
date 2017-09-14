@@ -132,12 +132,12 @@ Packages must be named with a so-called "string-designator", which can be quite
 confusing, as it results in several different styles of working with packages.
 
 ~~~ common_lisp
-(defpackage :sneaky)
-(defpackage #:sneaky)
-(defpackage "sneaky")
+(defpackage :sneaky  (:use :cl))
+(defpackage #:sneaky (:use :cl))
+(defpackage "SNEAKY" (:use :cl))
 ~~~
 
-TODO - the differences ^
+<!-- TODO - the differences ^ -->
 
 
 ### Accessing Symbols in Other Packages
@@ -147,13 +147,14 @@ There are three commonly used and seen ways to refer to symbols:
 2. `foo:bar`
 3. `foo::bar`
 
-In the first case, the Lisp evaluator will search for the symbol `bar` in the
-current package, and use its value.
+In the first case, the Lisp reader will search for the symbol `bar` in the
+current package.
 
 In the second case, the symbol will be searched for in the list of symbols
-exported by the `foo` package. If it cannot be found, an error is signaled.
+exported by the `foo` package. If the package `foo` cannot be found, or the
+symbol `bar` is not external in `foo`, an error is signalled.
 
-TODO - wording:
+<!-- TODO - wording: -->
 
 In the third case, the symbol is evaluated *in the context* of `foo`, ignoring
 the exported symbols list. This allows "unlimited" access to the symbols in
@@ -161,10 +162,11 @@ the exported symbols list. This allows "unlimited" access to the symbols in
 exported by a package, it probably is not meant to be used. However it is common
 to see symbols printed in this format.
 
-**Note**: when the Lisp reader reads a symbol, it *internalises* the symbol,
-which essentially means it creates a symbol of the given name in the current
-package. This can result in conflicts later if a symbol of the same name is
-imported from another package.
+**Note**: when the Lisp reader reads a symbol, it internalises the symbol, which
+essentially means it creates a symbol of the given name in the current package
+(if one does not already exist). This can result in conflicts later if a symbol
+of the same name is *inherited* (via `use-package`) from another package.
+See [Symbols](symbols.html) for more details.
 
 
 ## ASDF
@@ -269,7 +271,7 @@ of the symbols from the `:cl` package (a nickname for `:common-lisp`), which
 means all standard Common Lisp symbols (i.e. `defun`, `setf`, etc) will be
 available.
 
-[defpackage]: TODO
+[defpackage]: http://www.lispworks.com/documentation/HyperSpec/Body/m_defpkg.htm
 
 The `:bobbio.web` package also uses `cl` (most packages will), exports the
 `start-server` symbol, and also *imports* the `get-message` symbol from
