@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Source Code Organisation
-updated: 30/05/2017
+updated: 01/08/2018
 ---
 
 Answers to some commonly asked questions about how to organise Common Lisp code,
@@ -313,7 +313,7 @@ Put the following into `web.lisp`:
 (defvar *app* (make-instance 'ningle:<app>))
 
 (setf (ningle:route *app* "/")
-      get-message)
+      (get-message))
 
 (defun start-server ()
   (clack:clackup *app*))
