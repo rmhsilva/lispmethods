@@ -39,12 +39,6 @@ the [examples](#examples).
 
 ## Definitions
 
-{::comment}
-TODO:
-This really needs to be more detailed. Link to other articles about packages, in
-particular, what `CL-USER` is, etc.
-{:/comment}
-
 For the purposes of this article, a **library** is a collection of code for
 doing something specific, designed to be used as part of a larger library or
 application. This is a pretty vague definition. Common Lisp has a few ways of
@@ -124,21 +118,28 @@ basic but useful "API" and dependency tree for all the files.
 
 Packages are defined with [DEFPACKAGE][defpackage], and usually contain at
 least:
-- the package name / identifier
+- the package name / identifier (an ASCII string)
 - a list of symbols the package exports
 - a list of other symbols imported into the package
 
 Packages must be named with a so-called "string-designator", which can be quite
 confusing, as it results in several different styles of working with packages.
+These three lines all define a package with the same name (in most lisps with
+"normal" read-table configurations):
 
 ~~~ common_lisp
-(defpackage :sneaky  (:use :cl))
-(defpackage #:sneaky (:use :cl))
-(defpackage "SNEAKY" (:use :cl))
+(defpackage :sneaky  (:use #:cl))
+(defpackage #:sneaky (:use #:cl))
+(defpackage "SNEAKY" (:use #:cl))
 ~~~
 
-<!-- TODO - the differences ^ -->
+However, the first version has the side effect of also interning the `:sneaky`
+symbol in the `keywords` package. The second version does not have this side
+effect (the `#:` reader macro results in an uninterned symbol), so a small
+amount of memory is saved. In either case, the package name is the name of the
+symbol (which is usually uppercase, unless the `*readtable*` has been modified).
 
+**Most people tend to use either the first or second styles.**
 
 ### Accessing Symbols in Other Packages
 
