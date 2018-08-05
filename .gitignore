@@ -5,3 +5,5 @@ _site
 _drafts
 notes
 _notes
+_local_cert
+_serve.sh
