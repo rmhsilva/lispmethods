@@ -20,7 +20,7 @@ description: > # this means to ignore newlines until "baseurl:"
   programming tasks with it.
 
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://lispmethods.com"
+url: "https://lispmethods.com"
 
 # twitter_username: rmhsilva
 # github_username: rmhsilva
