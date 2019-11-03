@@ -27,7 +27,7 @@ Recommended reading for anyone new to Common Lisp:
 
 Enjoy!
 
-[*Ricardo da Silva*](http://rmhsilva.com)
+[*Ric da Silva*](http://rmhsilva.com)
 
 ---
 
