@@ -61,9 +61,9 @@ ignored. Instead, call this between requests to space them out.
 ~~~ common_lisp
 (defmacro with-url ((doc url) &body body)
   "Execute `body' with `url' as a plump document bound to `doc'"
-  `(let ((,doc (plump:parse (dex:get url))))
+  `(let ((,doc (plump:parse (dex:get ,url))))
      ,@body))
-     
+
 ;; Example
 (with-url (doc "http://scraped.com")
   (format t "#title text: ~A" (plump:text (clss:select "#title" doc))))
@@ -86,9 +86,9 @@ like:
 ~~~ common_lisp
 (defmacro clss-let (doc bindings &body body)
   "Uses CLSS to select something and assign it to a variable"
-  (let ((bindings-let (iter
-                        (for (var sel) in bindings)
-                        (collecting `(,var (clss:select ,sel ,doc))))))
+  (let ((bindings-let (loop
+                       :for (var sel) :in bindings
+                       :collecting `(,var (clss:select ,sel ,doc)))))
     `(let (,@bindings-let)
        ,@body)))
        
