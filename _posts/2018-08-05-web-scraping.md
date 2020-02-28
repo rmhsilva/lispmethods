@@ -10,10 +10,11 @@ quickly examine and extract information from documents.
 {:toc}
 
 You'll want to install [Plump][plump] and [CLSS][clss], the two libraries that
-make this all really easy. Install them with Quicklisp:
+make this all really easy. Also you'll want [Dexador](dexador) to retrieve web
+pages. Install them with Quicklisp:
 
 ~~~ common_lisp
-(ql:quickload '(:plump :clss))
+(ql:quickload '(:plump :clss :dexador))
 ~~~
 
 You will probably also want to install utility libraries such
@@ -23,10 +24,11 @@ as [Alexandria][alexandria], [cl-arrows][cl-arrows] and [cl-ppcre][cl-ppcre].
 (ql:quickload '(:alexandria :cl-arrows :cl-ppcre))
 ~~~
 
-[plump]: TODO
-[clss]: TODO
-[alexandria]: TODO
-[cl-arrows]: TODO
+[dexador]: https://github.com/fukamachi/dexador
+[plump]: https://shinmera.github.io/plump
+[clss]: https://github.com/Shinmera/CLSS
+[alexandria]: https://common-lisp.net/project/alexandria
+[cl-arrows]: https://github.com/nightfly19/cl-arrows
 
 
 # General Techniques
