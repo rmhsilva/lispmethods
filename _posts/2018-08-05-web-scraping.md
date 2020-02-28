@@ -10,7 +10,7 @@ quickly examine and extract information from documents.
 {:toc}
 
 You'll want to install [Plump][plump] and [CLSS][clss], the two libraries that
-make this all really easy. Also you'll want [Dexador](dexador) to retrieve web
+make this all really easy. Also you'll want [Dexador][dexador] to retrieve web
 pages. Install them with Quicklisp:
 
 ~~~ common_lisp
