@@ -16,14 +16,15 @@
           {% else %}
           <span>Published:</span> <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>
           {% endif %}
+          <br>–
         </p>
 
-        <div class="post-meta">
+        <div class="post-meta" style="margin-left: 180px">
           <script src="https://utteranc.es/client.js"
                   repo="rmhsilva/lispmethods"
                   issue-term="title"
                   label="comments"
-                  theme="preferred-color-scheme"
+                  theme="github-light"
                   crossorigin="anonymous"
                   async>
           </script>
