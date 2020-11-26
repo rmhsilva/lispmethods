@@ -10,18 +10,23 @@
         </div>
 
         <p class="post-meta">
-            Thanks for reading! Comments? Problems? Put 'em <a href="https://github.com/rmhsilva/lispmethods">here</a>.
+          <span>Thanks for reading!</span>
+          {% if page.updated %}
+          <span>Updated:</span> <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="dateModified">{{ page.updated | date: "%b %-d, %Y" }}</time>
+          {% else %}
+          <span>Published:</span> <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>
+          {% endif %}
         </p>
-        <p class="post-meta">
-            {% if page.updated %}
-            <span>Updated:</span> <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="dateModified">{{ page.updated | date: "%b %-d, %Y" }}</time>
-            {% else %}
-            <span>Published:</span> <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>
-            {% endif %}
-        </p>
-    </div>
 
-    {% if site.disqus.shortname %}
-    {% include disqus_comments.html %}
-    {% endif %}
+        <div class="post-meta">
+          <script src="https://utteranc.es/client.js"
+                  repo="rmhsilva/lispmethods"
+                  issue-term="title"
+                  label="comments"
+                  theme="github-light"
+                  crossorigin="anonymous"
+                  async>
+          </script>
+        </div>
+    </div>
 </article>
